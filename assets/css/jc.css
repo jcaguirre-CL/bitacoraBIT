@@ -1,0 +1,46 @@
+#wrapperArticle {
+  -moz-flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  -ms-flex: 1;
+  padding: 3.75em 3em 3.3em 3em;
+    /*border: 1px solid grey;*/
+    overflow: auto;
+    margin-bottom: 0;
+}
+#firstArticle {
+    float: left;
+    display: inline-block;
+
+    /*border: 1px solid grey;*/
+}
+#secondArticle {
+    float: right;
+    display: inline-block;
+    /*border: 1px solid grey;*/
+    /*margin: 0 0 0 302px;*/
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+span.botonlimpiarFiltro {
+    background: url(../../images/logo.jpg) no-repeat; /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 1em;           /* make this the size of your image */
+    padding-left: 1em;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+/*span.botonlimpiarFiltro {
+    background: url(../../images/logo.jpg) no-repeat;
+    float: left;
+    width: 10px;
+    height: 40px;
+}*/

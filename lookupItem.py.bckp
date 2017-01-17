@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+
+import smtplib
+import re
+import datetime
+import fcntl
+import signal
+import os
+import shutil
+import sys
+import time
+import logging
+import subprocess
+import json
+
+#from sh import rsync
+from watchdog.observers import Observer
+from watchdog.events import LoggingEventHandler
+from watchdog.events import PatternMatchingEventHandler
+from watchdog.events import FileSystemEventHandler
+
+
+def modificarJson(nombre):
+    with open('/var/www/html/ingenieria/aplicaciones/progreso.json') as jsonFile:
+        datos = json.load(jsonFile)
+        nombre1 = nombre.split("/")[5]
+        datos['clip'] = nombre1.split("-")[0]
+        datos['estado'] = 0
+        datos['inicio'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        #print(datos)
+        jsonFile.close()
+
+    with open('/var/www/html/ingenieria/aplicaciones/progreso.json', 'w') as jsonFile:
+        jsonData = json.dumps(datos, indent=4, skipkeys=True, sort_keys=True)
+        jsonFile.write(jsonData)
+        jsonFile.close()
+
+class JcHandler(FileSystemEventHandler):
+    def __init__(self, observer):
+        self.observer = observer
+  
+    def on_created(self, event):
+        nombre = event.src_path
+        logging.info(nombre)
+        nombre = nombre.replace(" ", "")
+        if not nombre == event.src_path:
+            subprocess.call(['mv',event.src_path,nombre])
+            logging.info('Eliminando espacios!!')
+            logging.info(nombre)
+        print nombre
+        modificarJson(nombre)
+        #os.system("/var/www/html/ingenieria/aplicaciones/sacaProgreso.py %s", nombre)
+        proc = subprocess.Popen(["/var/www/html/ingenieria/aplicaciones/sacaProgreso.py", nombre])
+ 
+if __name__ == "__main__":
+    logfile = '/tmp/transcode/LOGs/porcentaje.log'
+    print "Observando directorio!!!"
+    logging.basicConfig(filename=logfile,level=logging.DEBUG,format='%(asctime)s :: %(levelname)s ::: %(message)s',datefmt='%Y-%m-%d %H:%M:%S')
+    logging.info('Observando directorio!!!')
+    path = "/tmp/transcode/LOGs/OUTPUT1"
+    observer = Observer()
+    event_handler = JcHandler(observer)
+    observer.schedule(event_handler, path, recursive=True)
+    observer.start()
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()
+
+
+

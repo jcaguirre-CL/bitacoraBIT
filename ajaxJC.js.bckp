@@ -1,0 +1,104 @@
+(function (global) {
+
+	
+
+	function getRequestObject() {
+		if (window.XMLHttpRequest) {
+			return (new XMLHttpRequest());
+		}
+		else if (window.ActiveXObject) {
+			
+			return (new ActiveXObject("Microsoft.XMLHTTP"));
+		}
+		else {
+			global.alert("Ajax is not supported!");
+			return(null);
+		}
+
+	}
+
+var request = getRequestObject();
+var myhandler = null;
+
+function handleResponse(request,
+						responseHandler,
+						isJsonResponse) {
+	console.log("********HR : request = " + request);
+	console.log("********HR : responseHandler = " + responseHandler);
+	console.log("********HR : isJsonResponse = " + isJsonResponse);
+	if ((request.readyState == 4) &&
+		(request.status == 200)) {
+
+	if (isJsonResponse == undefined) {
+		isJsonResponse = true;
+	}
+	if (isJsonResponse) {
+		responseHandler(JSON.parse(request.responseText))
+	}
+	else {
+		console.log("dentro del handleResponse");
+
+		responseHandler(request.responseText);
+	}
+	}	
+}
+
+var compara = 0;
+
+var auto = setInterval(function callTimer(){
+	xmlJson = getRequestObject();
+	var barrita = document.getElementById("barraInterna");
+	console.log(xmlJson);
+	xmlJson.onreadystatechange=function(){
+		
+		if (xmlJson.readyState==4){
+			if (xmlJson.status==200){
+				respu = JSON.parse(xmlJson.responseText)
+				if (compara==respu.clip){
+					console.log("progreso se mantiene");
+				}
+				else {
+					console.log("progreso cambia" + compara);
+					compara = respu.progreso;
+				}
+
+				document.getElementById("clip").innerHTML=respu.clip;
+				document.getElementById("inicio").innerHTML=respu.inicio;
+				barrita.style.width = respu.progreso + '%';
+				document.getElementById("progresoLabel").innerHTML=respu.progreso;
+				//document.getElementById("estado").innerHTML=respu.estado;
+				switch (respu.estado)
+				{
+					case 0 : document.getElementById("estado").innerHTML="Activo";
+					break;
+					case 1 : document.getElementById("estado").innerHTML="Ok";
+					break;
+					case 2 : document.getElementById("estado").innerHTML="Error";
+					break;
+				}
+				switch (respu.output)
+				{
+					case 1 : document.getElementById("output").innerHTML="A";
+					break;
+					case 2 : document.getElementById("output").innerHTML="B";
+					break;
+					case 3 : document.getElementById("output").innerHTML="C";
+					break;
+					case 4 : document.getElementById("output").innerHTML="D";
+					break;
+				}
+				//document.getElementById("output").innerHTML=respu.output;
+				console.log("jsonautoupdate");
+			}
+		}
+	}
+
+	xmlJson.open("GET", "progreso.json", true);
+	//xmlJson.timeout = 500;
+	xmlJson.send();
+
+}, 1000);
+
+})(window);
+
+

@@ -1,0 +1,109 @@
+/* use this to put borders around things... */
+@media (min-width: 500px){
+	body{
+		background: red;
+	}
+}
+
+@media (min-width: 1000px){
+	body{
+		background: green;
+	}
+}
+
+@media (min-width: 500px){
+	.responsive{
+		display: inline-block;
+		width: 200px;
+		border: 1px solid black;
+	}
+}
+
+@media (min-width: 1000px){
+	.responsive{
+		display: inline-block;
+		width: 1000px;
+		border: 1px solid black;
+	}
+}
+/*
+@media (max-width: 1500px){
+	body{
+		background: black;
+	}
+}
+
+body{
+	background: black;
+	color: white;
+}
+*/
+a{
+	color: gray;
+	text-decoration: none;
+}
+
+a:hover{
+	color: black;
+	background: blue;
+	text-decoration: none;
+}
+
+h1{
+	font-family: "Times new roman" serif;
+	font-size: 100pt;
+}
+
+.indent {
+	margin-left: 100px; 
+}
+
+.gap_below {
+	margin-bottom: 10px;
+}
+
+.green_link:hover{
+	color: green;
+	background: gray;
+}
+
+.thin_border{
+	border: 4px solid blue;
+}
+
+.crop-img{
+  max-height:150px;
+  max-width:100%;
+}
+
+/* this is for the big main image */
+.large-img{
+  max-width:100%;
+}
+
+/* 
+   This is the css for the chapter thumbnails
+   They are small boxes that show the first
+   few lines of a chapter. 
+   There are several bits of css to make sure that they 
+   properly.
+*/ 
+.chapter-thumbnail {
+  margin-top: 10px;   /* add a margin to look nice */
+  white-space : pre;  /* preserve the original line breaks and spacing
+  						 (I need this because the content of the 
+  						 chapter is just text not HTML, so normally
+  						 the line breaks would be ignored) */
+  overflow : hidden;  /* don't show a scroll bar when the text is
+                         too big to fit in the box (which it always 
+                         will be but we don't mind as it is just a 
+                         thumbnail) */
+  max-height: 150px;  /* make sure that the box doesn't get too big */
+  height : 150px;     /* even if the text is big */
+  border-radius: 10px;/* rounded corners */ 
+}
+
+#mainViewer {
+  margin-top: 10px;   
+  white-space : pre;   /* preserve the original line breaks (see above)*/
+}

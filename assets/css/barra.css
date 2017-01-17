@@ -1,0 +1,64 @@
+#barraProgreso1 {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: grey;
+}
+#barraInterna1 {
+    position: absolute;
+    height: 100%;
+    background-color: green;
+}
+#progresoLabel1 {
+    text-align: center; 
+    line-height: 17px; 
+    color: white;
+}
+#barraProgreso2 {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: grey;
+}
+#barraInterna2 {
+    position: absolute;
+    height: 100%;
+    background-color: green;
+}
+#progresoLabel2 {
+    text-align: center; 
+    line-height: 17px; 
+    color: white;
+}
+#barraProgreso3 {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: grey;
+}
+#barraInterna3 {
+    position: absolute;
+    height: 100%;
+    background-color: green;
+}
+#progresoLabel3 {
+    text-align: center; 
+    line-height: 17px; 
+    color: white;
+}
+#barraProgreso4 {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: grey;
+}
+#barraInterna4 {
+    position: absolute;
+    height: 100%;
+    background-color: green;
+}
+#progresoLabel4 {
+    text-align: center; 
+    line-height: 17px; 
+    color: white;
+}

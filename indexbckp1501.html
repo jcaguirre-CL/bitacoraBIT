@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html ng-app="angularBitacora">
+	<head>
+		<title>INGENIERIA BIT C13</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/barra.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/jc.css" />
+		<!--EXTRAS
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap2.css"/>
+		<link rel="stylesheet" type="text/css" href="assets/css/styles.css"/>
+    	<link rel="stylesheet" type="text/css" href="assets/css/gallery.css"/>
+	    -->
+			<style>
+
+</style>
+	</head>
+	<body ng-controller="mainController">
+			<div id="wrapper">
+					<header id="header">
+						<h1><a href="../../index.html">INGENIERIA BIT</a></h1>
+						<nav class="links">
+							<ul>
+                            	<li><a href="../../index.html">EN VIVO</a></li>
+                                <li><a href="../../vod/index.html">VOD</a></li>
+                                <li><a href="../../descargas/index.html">DESCARGAS</a></li>
+                                <li><a href="../../materialVizone/index.html">MATERIAL VIZONE</a>
+                                <li><a href="#">APLICACIONES</a>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+					<!--POPUP-->
+					<section id="menu">
+							<section>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>EN VIVO</h3>
+											<p>Visualizar las distintas señales en vivo de 13.cl</p>
+										</a>
+									</li>
+									<li>
+										<a href="vod/index.html">
+											<h3>VOD</h3>
+											<p>Revisar contenido Online</p>
+										</a>
+									</li>
+                                   <li>
+                                                <a href="descargas/index.html">
+                                                        <h3>DESCARGAS</h3>
+                                                        <p>Aplicaciones, utilidades</p>
+                                                </a>
+                                        </li>
+                                   <li>
+                                                <a href="materialVizone/index.html">
+                                                        <h3>Material VIZONE</h3>
+                                                        <p>Contenido de apoyo Vizone</p>
+                                                </a>
+                                        </li>
+
+								</ul>
+							</section>
+							<section>
+								<ul class="actions vertical">
+									<li><a href="#" class="button big fit">Ingresar</a></li>
+								</ul>
+							</section>
+					</section>
+					<!--BLOQUE CENTRAL-->
+					<div id="main">
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">BITACORA BIT</a></h2>
+										<p>Registro de tareas</p>
+
+									</div>
+									<div class="meta">
+										<time id="fecha" class="published"></time>
+										<a href="#" class="author"><span class="name">...</span><img src="images/arriba.png" alt="" /></a>
+
+									</div>
+								</header>
+								<footer>
+									<!--Inicio conenedir-->
+										<div class="actions">
+
+											<table id="tablaTareas"  cellspacing="10" width="100%" padding="0em">
+										        <thead>
+										            <tr>
+										                <th>Titulo</th>
+										                <th>Responsable</th>
+										                <th>Estado</th>
+										                <th>Fecha Creacion</th>
+										            </tr>
+										        </thead>
+										        <tbody>
+<!-- <li id="inner" class="lista" ng-click="marcarRegistro(registro._id)" ng-repeat="registro in bitacora | filter: filter | filter: filter1">{{registro.titulo}} | {{registro.updated_at | date:'dd/MM/yyyy @ h:mma'}}</li> -->
+
+															<tr ng-repeat="registro in bitacora | filter: filter | filter: filter1" ng-click="marcarRegistro(registro._id)">
+																<td>{{registro.titulo}}</td>
+																<td>{{registro.responsable}}</td>
+																<td>{{registro.completada}}</td>
+																<td>{{registro.created_at | date:'dd/MM/yyyy @ h:mma'}}</td>
+															</tr>
+
+
+										        </tbody>
+										    </table>
+
+											</div>
+											<div class="stats">
+												<form>
+													<label for="fname">Titulo:</label>
+													<!-- <input type="text" class="form-control input-lg text-left" placeholder="Titulo nuevo registro" ng-model="formData.textTitulo"> -->
+													<input type="text" placeholder="Titulo nuevo registro" ng-model="formData.textTitulo" ng-cloak><br>
+
+
+													<label for="lname">Descripcion:</label>
+													<!-- <textarea placeholder="Descripcion nuevo registro" class="form-control input-lg text-left" ng-model="formData.textDescripcion"></textarea> -->
+													<textarea placeholder="Descripcion nuevo registro" ng-model="formData.textDescripcion" ng-cloak></textarea><br>
+													<!--
+													<input type="text" class="form-control input-lg text-left" placeholder="Descripcion nuevo registro" ng-model="formData.textDescripcion">
+												-->
+												<label for="resp">Responsable:</label>
+
+												<!-- <textarea placeholder="Descripcion nuevo registro" class="form-control input-lg text-left" ng-model="formData.textDescripcion"></textarea> -->
+												<input type="text" placeholder="{{formData.textResponsable}}" readonly ng-cloak>
+													<select id="resp" name="respon" ng-model="textResponsable" ng-change="selectResponsable()" ng-cloak>
+														<!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
+														<option value="" selected disabled hidden>Seleccione responsable</option>
+														<!-- <option value="">{{textResponsable}}</option> -->
+														<option ng-repeat="responsable in responsables" value="{{responsable}}" >{{responsable}}</option>
+													</select><br>
+
+													<!-- <select id="resp" name="respon" ng-model="formData.textResponsable">
+							              <label for="resp">Responsable:</label>
+							              <option value="">{{textResponsable}}</option>
+							              <option ng-repeat="responsable in responsables" value="{{responsable}}">{{responsable}}</option>
+							            </select> -->
+
+													<label for="selfinalizado">Finalizado: </label>
+													<input id="final1" type="radio" name="selFinalizado" ng-click="setFinalizado('true')">SI<br>
+													<input id="final2" type="radio" name="selFinalizado" ng-click="setFinalizado('false')">NO<br>
+
+													<!-- <h5><span class="glyphicon glyphicon-time">{{CurrentDate | date:'dd/MM/yyyy @ h:mma'}}</span></h5> -->
+													<br>
+
+													<!-- <button type="submit" class="btn btn-success btn-lg" ng-click="crearRegistro()">Agregar</button> -->
+													<button type="submit" ng-click="crearRegistro()">Agregar</button>
+													<button type="submit"  ng-click="actualizaBitacora(registroID)">Actualizar</button>
+													<button type="submit"  ng-click="deleteBitacora(registroID)">Borrar</button>
+
+
+												</form>
+											<!--Inicio conenedir-->
+<!--
+											<table id="tablaTareas" class="display" cellspacing="0" width="100%">
+														<thead>
+																<tr>
+																		<th>Titulo</th>
+																		<th>Responsable</th>
+																		<th>Estado</th>
+																		<th>Fecha</th>
+																</tr>
+														</thead>
+														<tbody>
+																<tr>
+																		<td id="titulo"></td>
+																		<td id="responsable"></td>
+																		<td id="estado"></td>
+																		<td id="fechaCreacion"></td>
+																</tr>
+														</tbody>
+												</table>
+-->
+										</div>
+								</footer>
+								<!--Fin conenedir-->
+							</article>
+
+							<ul class="actions pagination">
+								<li><a href="" class="disabled button big previous">Previa</a></li>
+								<li><a href="" class="disabled button big next">Siguiente</a></li>
+							</ul>
+					</div>
+					<!--MENU LATERAL-->
+					<section id="sidebar">
+							<section id="intro">
+								<a href="http://www.ingenieriac13.cl" class="logo"><img src="images/logo_bit.jpg" alt="" /></a>
+								<header>
+									<h2>INGENIERIA BIT</h2>
+									<h3>Canal 13</h3>
+									<p><a href="http://10.128.2.24/play2"></a></p>
+								</header>
+							</section>
+							<section>
+								<div class="mini-posts">
+                    		    <article class="mini-post">
+                        	    	<header>
+                           	    		<h3><a href="../index.html">Transcode BIT</a></h3>
+                                  		<time class="published" id="tiempoArticle1"></time>
+                                  		<a href="../index.html" class="author"><img src="images/transcoding.jpg" alt="" /></a>
+                               		</header>
+                               			<a href="../index.html" class="image"><img src="images/Transcoding2.jpg" alt="" height="200" width="80"/></a>
+                            	</article>
+															<article class="mini-post">
+																	<header>
+																			<h3><a href="#">Bitacora BIT</a></h3>
+																				<time class="published" id="tiempoArticle2"></time>
+																				<a href="#" class="author"><img src="images/imagenbitacora.jpg" alt="" /></a>
+																		</header>
+																			<a href="#" class="image"><img src="images/imagenbitacora.jpg" alt="" height="200" width="80"/></a>
+																</article>
+								</div>
+							</section>
+							<section>
+								<ul class="posts">
+								</ul>
+							</section>
+							<section id="footer">
+								<ul class="icons">
+									<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+									<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+								<p class="copyright">&copy; . <a href="http://www.ingenieriac13.cl">JeyCe</a> : <a href="http://www.ingenieriac13.cl">.</a>.</p>
+							</section>
+					</section>
+			</div>
+			<!-- <script type="text/javascript" src="ajaxJC.js"></script> -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main1.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+			<script src="http://10.128.3.19:3000/main.js"></script>
+			<script src="assets/js/lahora.js"></script>
+
+			<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script> -->
+			<!-- <script src="main.js"></script> -->
+	</body>
+</html>

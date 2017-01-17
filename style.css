@@ -1,0 +1,38 @@
+ul.horizontal{
+margin:0;
+padding:0;
+}
+
+ul.horizontal li{
+display:block;
+float:left;
+padding:0 10px;
+}
+
+.sobre
+{ 
+background-color:#FFFFFF; 
+color:#000000;
+}
+.fuera
+{ 
+background-color:#666666; 
+color:#FFFFFF; 
+}
+
+body {
+	  background-color: #0080FF;
+  font-family:Monaco,Georgia,Times,serif;
+}
+
+p { color: black; font-family: Verdana; }
+
+#content h1 {
+  font-style:italic;
+  font-weight:bold;
+  font-size:4em;
+  font-color:#ffffff;
+  font-family:'Helvetica';
+}
+
+
